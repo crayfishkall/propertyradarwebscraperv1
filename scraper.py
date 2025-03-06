@@ -174,17 +174,8 @@ for tab_name, tab_xpath in tabs.items():
 # Assuming you have the address from your URL and mailing address from your scraping function
 address = property_url.split("/")[-1]
 
-# Extract the mailing address
-mailing_address = extract_label_value(soup, 'Mailing Address')
-
-# Clean the mailing address to make it suitable for a file name
-safe_address = re.sub(r'[<>:"/\\|?*]', '_', mailing_address)
-
-# Use the cleaned value as the save name (for Excel file)
-save_name = f"{safe_address}.xlsx"  # Change to .xlsx for Excel file
-
-# Assuming you have tab_data and create_tab_dataframe ready
-excel_filename = save_name  # Using the cleaned address for the filename
+# Create Excel file
+excel_filename = f"{address}_property_data.xlsx"
 
 # Create Excel file with multiple tabs
 with pd.ExcelWriter(excel_filename, engine='xlsxwriter') as writer:
